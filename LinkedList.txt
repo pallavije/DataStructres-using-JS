@@ -1,0 +1,87 @@
+//CreateLinkedList-Constuctor
+
+function LinkedList(){
+  this.head=null;
+  this.tail=null;
+}
+//Create Node -Constuctor
+function Node(value,prev,next){
+  this.value=value;
+  this.prev=prev;
+  this.next=next;
+}
+
+//Function to add node to head
+LinkedList.prototype.addhead=function(value){
+  var newnode=new Node(value,null,this.head);
+  if(this.head) this.head.prev=newnode;
+  else this.tail=newnode;
+  this.head=newnode;
+};
+
+var ll=new LinkedList();
+ll.addhead(100);
+ll.addhead(90);
+ll.addhead(80);
+ll.addhead(70);
+//console.log(ll);
+
+//Function to add node to tail
+LinkedList.prototype.addtail=function(value){
+  var newnode= new Node(value,this.tail,null);
+  if(this.tail) this.tail.next=newnode;
+  else this.head=newnode;
+  this.tail=newnode;
+};
+ll.addtail(110)
+ll.addtail(70)
+
+//console.log(ll);
+
+
+LinkedList.prototype.searchnodefromlist=function(value){
+  var startnode=this.head;
+  while(startnode){
+    if (startnode.value===value) return startnode.value;
+    startnode=startnode.next;
+  }return null
+};
+
+//ll.searchnodefromlist(100)
+
+
+//Function to search node and return index
+LinkedList.prototype.searchnodeandreturnIndex=function(value){
+var ind=[];
+var i=0;
+searchnode=this.head;
+//return(value)
+while(searchnode){
+  if (searchnode.value===value) ind.push(i);
+  searchnode=searchnode.next;
+   i=i+1;
+}
+return ind;
+}
+//ll.searchnodeandreturnIndex(70)
+console.log(ll)
+//function to remove head
+LinkedList.prototype.removeHead=function(){
+  if(this.head.next!=null) {
+    this.head=this.head.next;
+    this.head.prev=null;
+  }
+  else this.head.next=null;
+}
+//ll.removeHead()
+//console.log(ll.head.next.next.next.next.next)
+
+LinkedList.prototype.removeTail=function(){
+  if(this.tail.prev!=null){
+    this.tail=this.tail.prev;
+    this.tail.next=null;
+  }
+  else this.tail.prev=null;
+}
+ll.removeTail();
+console.log(ll);

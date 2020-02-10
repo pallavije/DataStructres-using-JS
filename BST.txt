@@ -1,0 +1,42 @@
+
+function BST(value){
+  this.value=value;
+  this.left=null;
+  this.right=null;
+}
+
+BST.prototype.insert=function(newnode){
+  if(this.value>=newnode){
+    if(!this.left) this.left=new BST(newnode);
+    else this.left.insert(newnode);
+  }
+  else {
+    if(!this.right) this.right=new BST(newnode);
+    else this.right.insert(newnode);
+  }
+}
+
+var a=new BST(50)
+a.insert(30)
+a.insert(70)
+a.insert(10)
+a.insert(40)
+a.insert(60)
+a.insert(80)
+//console.log(a)
+
+BST.prototype.contains=function(searchvalue){
+  if(this.value===searchvalue) return true;
+  else if(this.value>searchvalue){
+    if(!this.left) return false;
+    else
+    return this.left.contains(searchvalue);
+  }
+ else if(this.value<searchvalue){
+    if(!this.right)  return false;
+    else
+    return this.right.contains(searchvalue);
+  }
+  else return false;
+}
+console.log(a.contains(100));
