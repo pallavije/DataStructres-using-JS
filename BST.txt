@@ -1,4 +1,3 @@
-
 function BST(value){
   this.value=value;
   this.left=null;
@@ -16,27 +15,79 @@ BST.prototype.insert=function(newnode){
   }
 }
 
-var a=new BST(50)
-a.insert(30)
-a.insert(70)
-a.insert(10)
-a.insert(40)
-a.insert(60)
-a.insert(80)
-//console.log(a)
+var a= new BST(50);
+a.insert(30);
+a.insert(70);
+a.insert(100);
+a.insert(60);
+a.insert(59);
+a.insert(20);
+a.insert(45);
+a.insert(35);
+a.insert(85);
+a.insert(105);
+a.insert(10);
 
-BST.prototype.contains=function(searchvalue){
-  if(this.value===searchvalue) return true;
-  else if(this.value>searchvalue){
-    if(!this.left) return false;
-    else
-    return this.left.contains(searchvalue);
-  }
- else if(this.value<searchvalue){
-    if(!this.right)  return false;
-    else
-    return this.right.contains(searchvalue);
-  }
-  else return false;
+//console.log(a);
+
+
+BST.prototype.search=function(searchnode){
+  if(this.value===searchnode) return (console.log("Found"));
+  else if(this.value>searchnode && this.left!=null)
+    return(this.left.search(searchnode));
+  else if(this.value<=searchnode && this.right!=null)
+    return(this.right.search(searchnode));
+  else return (console.log("Not Found"));
 }
-console.log(a.contains(100));
+
+//a.search(160)
+
+BST.prototype.DFT=function(order){
+ if(order==='IN-ORDER') {
+   if(this.left) this.left.DFT(order);
+   console.log(this.value);
+   if(this.right) this.right.DFT(order);
+ }
+if(order==='PRE-ORDER') {
+  console.log(this.value);
+  if(this.left) this.left.DFT(order);
+  if(this.right) this.right.DFT(order);
+ }
+  if(order==='POST-ORDER') {
+  if(this.left) this.left.DFT(order);
+  if(this.right) this.right.DFT(order);
+  console.log(this.value);
+
+ }
+}
+//a.DFT('IN-ORDER')
+//a.DFT('PRE-ORDER')
+//a.DFT('POST-ORDER')
+
+BST.prototype.BFS=function(){
+  var queue=[this];
+  while(queue.length){
+   var treenode=queue.shift();
+    console.log(treenode.value);
+    if(treenode.left)queue.push(treenode.left);
+    if(treenode.right)queue.push(treenode.right);
+  }
+}
+  
+  //a.BFS();
+
+BST.prototype.FindMax=function(){
+  if (this.right) return(this.right.FindMax());
+  else console.log(this.value);
+}
+//a.FindMax();
+
+
+BST.prototype.FindMin=function(){
+  if (this.left) return(this.left.FindMin());
+  else console.log(this.value);
+}
+//a.FindMin();
+    
+
+  

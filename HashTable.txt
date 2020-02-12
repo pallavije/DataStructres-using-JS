@@ -1,0 +1,70 @@
+function HashTable(size){
+  this.bucket=Array(size);
+  this.numbucket=this.bucket.length;
+}
+
+  
+function HashNode(key,value,next){
+  this.key=key;
+  this.value=value;
+  this.next=next || null;
+}
+
+HashTable.prototype.Hash=function(key){
+  var total=0;
+  for (var i=0;i<key.length;i++){
+    total=total+key.charCodeAt(i);
+  }
+  return(total%this.numbucket);
+}
+
+
+HashTable.prototype.Insert=function(key,value){
+  var index=this.Hash(key);
+  if(!this.bucket[index]) this.bucket[index]= new HashNode(key,value);
+  else if(this.bucket[index].key===key) this.bucket[index].value=value; 
+  else {
+    var curnode=this.bucket[index];
+    while(curnode.next){
+      if(curnode.next.key===key){
+        curnode.next.value=value;
+        return
+      }
+      curnode=curnode.next;
+    }
+      curnode.next=new HashNode(key,value);
+  }
+}
+  
+
+
+var ht= new HashTable(20);
+ht.Insert('pallavi',12)
+ht.Insert('merwin',21)
+ht.Insert('punnya',15)
+ht.Insert('Deepu',18)
+ht.Insert('punnya',1)
+ht.Insert('ueepD',1)
+
+
+//console.log(ht.bucket)
+
+HashTable.prototype.get=function(key){
+  var index=this.Hash(key);
+  if (this.bucket[index]){
+    return(console.log(this.bucket[index].value));//if(this.bucket[i]===key) //return(console.log(this.bucket[i].value));
+    i++;
+  }
+   return(console.log('not found'));
+}
+  ht.get("merwin")
+
+      
+
+    
+
+    
+    
+
+
+  
